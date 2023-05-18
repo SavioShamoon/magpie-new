@@ -6,9 +6,9 @@ import java.util.Random;
  * A program to carry on conversations with a human user.
  * This version:
  *<ul><li>
- * 		Uses advanced search for keywords 
+ *         Uses advanced search for keywords 
  *</li><li>
- * 		Will transform statements as well as react to keywords
+ *         Will transform statements as well as react to keywords
  *</li></ul>
  * This version uses an array to hold the default responses.
  * @author Laurie White
@@ -16,57 +16,67 @@ import java.util.Random;
  */
 public class Magpie5
 {
-	/**
-	 * Get a default greeting 	
-	 * @return a greeting
-	 */	
-	public String getGreeting()
-	{
-		return "Hello, let's talk.";
-	}
-	
-	/**
-	 * Gives a response to a user statement
-	 * 
-	 * @param statement
-	 *            the user statement
-	 * @return a response based on the rules given
-	 */
-	public String getResponse(String statement)
-	{
-		String response = "";
-		if (statement.length() == 0)
-		{
-			response = "Say something, please.";
-		}
+    /**
+     * Get a default greeting     
+     * @return a greeting
+     */    
+    public String getGreeting()
+    {
+        return "Hello, let's talk.";
+    }
 
-		else if (findKeyword(statement, "no") >= 0)
-		{
-			response = "Why so negative?";
-		}
-		else if (findKeyword(statement, "mother") >= 0
-				|| findKeyword(statement, "father") >= 0
-				|| findKeyword(statement, "sister") >= 0
-				|| findKeyword(statement, "brother") >= 0)
-		{
-			response = "Tell me more about your family.";
-		}
+    /**
+     * Gives a response to a user statement
+     * 
+     * @param statement
+     *            the user statement
+     * @return a response based on the rules given
+     */
+    public String getResponse(String statement)
+    {
+        String response = "";
+        if (statement.length() == 0)
+        {
+            response = "Say something, please.";
+        }
 
-		// Responses which require transformations
-		else if (findKeyword(statement, "I want to", 0) >= 0)
-		{
-			response = transformIWantToStatement(statement);
-		}
-		//  Part of student solution
-		else if (findKeyword(statement, "I want", 0) >= 0)
-		{
-			response = transformIWantStatement(statement);
-		}
+        else if (findKeyword(statement, "What's your name?") >= 0)
+        {
+            response = "Eleanor Roosevelt";
+        }
+        else if (findKeyword(statement, "What are you famous for?") >= 0)
 
-		else
-		{
+            response = "A former First Lady of the United States";
+        
 
-			// Look for a two word (you <something> me)
+            // Responses which require transformations
+        else if (findKeyword(statement, "Are you or were you married?", 0) >= 0)
+            {
+                response = "Franklin D. Roosevelt";
+            }
+            //  Part of student solution
+            else if (findKeyword(statement, "Do you have any children?", 0) >= 0)
+            {
+                response = "Yes I have 5.";
+            }
+             else if (findKeyword(statement, "Where do you live?", 0) >= 0)
+            {
+                response = "I lived in New York, Washington D.C., and Hemptead.";
+            }
+              else if (findKeyword(statement, "What is their names", 0) >= 0)
+            {
+                response = "Anna Roosevelt Halsted, Franklin D. Roosevelt Jr.,Elliot Roosevelt, James Roosevelt, and John Aspinwall Roosevelt";
+            }
+              else if (findKeyword(statement, "Where were you born?", 0) >= 0)
+            {
+                response = "Born in Manhattan, New York City, New york.";
+            }
+            
+
+
+            else
+            {
+// Look for a two word (you <something> me)
 			// pattern
 			int psn = findKeyword(statement, "you", 0);
 
